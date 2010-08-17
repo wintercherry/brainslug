@@ -15,11 +15,12 @@ LIBOBJECTS = 	$(LIBDIR)/FrontendServer.o \
 		$(LIBDIR)/ResourceHandler.o \
 		$(LIBDIR)/TestDB.o \
 		$(LIBDIR)/SeasonsTestDB.o \
-		$(LIBDIR)/SeasonsResourceHandler.o
+		$(LIBDIR)/SeasonsResourceHandler.o \
+		$(LIBDIR)/SQLiteDB.o
 CMDAPPOBJECTS =	$(LIBDIR)/main.o
 CMDAPP = $(BINDIR)/brainslug-backend
 CFLAGS = -Wall -g -I$(BOOST_ROOT)/include -I$(INCDIR) -I$(CONTRIBDIR)/cajun
-LDFLAGS = -L$(BOOST_ROOT)/lib -L$(LIBDIR) -lboost_system -lboost_program_options -lpion-net -lpion-common -lboost_thread-mt -lssl -lcrypto 
+LDFLAGS = -L$(BOOST_ROOT)/lib -L$(LIBDIR) -lboost_system -lboost_program_options -lpion-net -lpion-common -lboost_thread-mt -lssl -lcrypto -lsqlite3
 RM = rm
 RMFLAGS = -rf
 CXX = g++
