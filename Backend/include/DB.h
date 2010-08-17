@@ -12,6 +12,7 @@ typedef boost::shared_ptr<json::Object> JSONObjectPtr;
 class DB {
 public:
   virtual ~DB() {}
+  virtual bool execute(const std::string& query, std::string& errorMessage) const { return false; }
   // returns a JSON document containing:
   // 1) all items in the given source (or nothing if the source is empty)
   // 2) an error or null if everything succeeded
