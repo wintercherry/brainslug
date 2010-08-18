@@ -21,6 +21,9 @@ FrontendServer::FrontendServer(const Options& o)
   , _seasonsTestDB(new SeasonsTestDB)
   , _sh(_seasonsTestDB)
 {
+  _mh.initTestData();
+  _tvh.initTestData();
+  _sh.initTestData();
   _httpServer.setNotFoundHandler(
 				 boost::bind(&FrontendServer::handleNotFound, this, _1, _2));
   _httpServer.addResource(

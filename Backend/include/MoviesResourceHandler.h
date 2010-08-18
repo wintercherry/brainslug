@@ -4,4 +4,5 @@
 class MoviesResourceHandler : public ResourceHandler {
 public:
   MoviesResourceHandler(const DBPtr db);
+  virtual void initTestData();
 };
