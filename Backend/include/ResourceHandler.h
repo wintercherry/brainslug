@@ -9,6 +9,7 @@ public:
   ResourceHandler(const DBPtr db, const std::string& source);
   virtual ~ResourceHandler();
   virtual void handle(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
+  virtual void initTestData();
 
 protected:
   DBPtr db() const;
