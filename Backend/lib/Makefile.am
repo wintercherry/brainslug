@@ -1,6 +1,5 @@
 lib_LTLIBRARIES = libbrainslug.la
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/../Contrib/cajun $(BOOST_CPPFLAGS)
-AM_LDFLAGS = $(BOOST_LDFLAGS)
 libbrainslug_la_SOURCES = FrontendServer.cpp \
 	MoviesResourceHandler.cpp \
 	TVShowsResourceHandler.cpp \

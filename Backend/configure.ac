@@ -19,10 +19,11 @@ BOOST_REQUIRE
 BOOST_SYSTEM
 BOOST_THREADS
 BOOST_PROGRAM_OPTIONS
+BOOST_ASIO
 
 AC_CHECK_LIB([crypto], [BF_set_key])
 AC_CHECK_LIB([sqlite3], [sqlite3_open])
-AC_CHECK_LIB([ssl], [ssl_write])
+AC_CHECK_LIB([ssl], [SSL_library_init])
 
 # Checks for header files.
 
