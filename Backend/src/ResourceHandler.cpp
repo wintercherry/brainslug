@@ -9,6 +9,9 @@ ResourceHandler::ResourceHandler(const DBPtr db, const std::string& source)
 
 ResourceHandler::~ResourceHandler() {}
 
+void ResourceHandler::initTestData() {
+}
+
 void ResourceHandler::writeJsonHttpResponse(const json::Object& obj,pion::net::HTTPResponseWriter& writer,const bool setStatusOK) {
       std::stringstream ss;
       json::Writer::Write(obj,ss);
