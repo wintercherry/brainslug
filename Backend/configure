@@ -15828,6 +15828,35 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 fi
 
 
+if test x"$boost_cv_inc_path" = xno; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: Boost not available, not searching for boost/asio.hpp" >&5
+$as_echo "$as_me: Boost not available, not searching for boost/asio.hpp" >&6;}
+else
+ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+boost_save_CPPFLAGS=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/asio.hpp" "ac_cv_header_boost_asio_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_asio_hpp" = x""yes; then :
+
+$as_echo "#define HAVE_BOOST_ASIO_HPP 1" >>confdefs.h
+
+else
+  as_fn_error "cannot find boost/asio.hpp" "$LINENO" 5
+fi
+
+
+CPPFLAGS=$boost_save_CPPFLAGS
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+fi
+
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for BF_set_key in -lcrypto" >&5
 $as_echo_n "checking for BF_set_key in -lcrypto... " >&6; }
@@ -15919,9 +15948,9 @@ _ACEOF
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for ssl_write in -lssl" >&5
-$as_echo_n "checking for ssl_write in -lssl... " >&6; }
-if test "${ac_cv_lib_ssl_ssl_write+set}" = set; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SSL_library_init in -lssl" >&5
+$as_echo_n "checking for SSL_library_init in -lssl... " >&6; }
+if test "${ac_cv_lib_ssl_SSL_library_init+set}" = set; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
@@ -15935,27 +15964,27 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char ssl_write ();
+char SSL_library_init ();
 int
 main ()
 {
-return ssl_write ();
+return SSL_library_init ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_ssl_ssl_write=yes
+  ac_cv_lib_ssl_SSL_library_init=yes
 else
-  ac_cv_lib_ssl_ssl_write=no
+  ac_cv_lib_ssl_SSL_library_init=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_ssl_write" >&5
-$as_echo "$ac_cv_lib_ssl_ssl_write" >&6; }
-if test "x$ac_cv_lib_ssl_ssl_write" = x""yes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_SSL_library_init" >&5
+$as_echo "$ac_cv_lib_ssl_SSL_library_init" >&6; }
+if test "x$ac_cv_lib_ssl_SSL_library_init" = x""yes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_LIBSSL 1
 _ACEOF
