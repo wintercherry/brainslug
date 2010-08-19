@@ -1,0 +1,19 @@
+// !$*UTF8*$!
+{
+	27F4E1CA121DECDC007F838A /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = 27F4E1D6121DECDC007F838A /* libbrainslug */;
+		codeSenseManager = 27F4E1CE121DECDC007F838A /* Code sense */;
+		ignoreBreakpointsInProjectsDict = {
+		};
+		userBuildSettings = {
+		};
+	};
+	27F4E1CE121DECDC007F838A /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	27F4E1D6121DECDC007F838A /* libbrainslug */ = {
+		activeExec = 0;
+	};
+}

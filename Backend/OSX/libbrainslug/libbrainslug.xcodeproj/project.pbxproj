@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27F4E275121DED91007F838A /* Conf.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E249121DED91007F838A /* Conf.h */; };
+		27F4E276121DED91007F838A /* DB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E24B121DED91007F838A /* DB.h */; };
+		27F4E277121DED91007F838A /* FrontendServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E24D121DED91007F838A /* FrontendServer.h */; };
+		27F4E278121DED91007F838A /* MoviesResourceHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E24E121DED91007F838A /* MoviesResourceHandler.h */; };
+		27F4E279121DED91007F838A /* MoviesTestDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E250121DED91007F838A /* MoviesTestDB.h */; };
+		27F4E27A121DED91007F838A /* Options.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E251121DED91007F838A /* Options.h */; };
+		27F4E27B121DED91007F838A /* ResourceHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E252121DED91007F838A /* ResourceHandler.h */; };
+		27F4E27C121DED91007F838A /* SeasonsResourceHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E254121DED91007F838A /* SeasonsResourceHandler.h */; };
+		27F4E27D121DED91007F838A /* SeasonsTestDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E255121DED91007F838A /* SeasonsTestDB.h */; };
+		27F4E27E121DED91007F838A /* SQLiteDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E256121DED91007F838A /* SQLiteDB.h */; };
+		27F4E27F121DED91007F838A /* TestDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E257121DED91007F838A /* TestDB.h */; };
+		27F4E280121DED91007F838A /* TVShowsResourceHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E258121DED91007F838A /* TVShowsResourceHandler.h */; };
+		27F4E281121DED91007F838A /* TVShowsTestDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F4E259121DED91007F838A /* TVShowsTestDB.h */; };
+		27F4E282121DED91007F838A /* FrontendServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E267121DED91007F838A /* FrontendServer.cpp */; };
+		27F4E285121DED92007F838A /* MoviesResourceHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E26C121DED91007F838A /* MoviesResourceHandler.cpp */; };
+		27F4E286121DED92007F838A /* MoviesTestDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E26D121DED91007F838A /* MoviesTestDB.cpp */; };
+		27F4E287121DED92007F838A /* ResourceHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E26E121DED91007F838A /* ResourceHandler.cpp */; };
+		27F4E288121DED92007F838A /* SeasonsResourceHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E26F121DED91007F838A /* SeasonsResourceHandler.cpp */; };
+		27F4E289121DED92007F838A /* SeasonsTestDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E270121DED91007F838A /* SeasonsTestDB.cpp */; };
+		27F4E28A121DED92007F838A /* SQLiteDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E271121DED91007F838A /* SQLiteDB.cpp */; };
+		27F4E28B121DED92007F838A /* TestDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E272121DED91007F838A /* TestDB.cpp */; };
+		27F4E28C121DED92007F838A /* TVShowsResourceHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E273121DED91007F838A /* TVShowsResourceHandler.cpp */; };
+		27F4E28D121DED92007F838A /* TVShowsTestDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F4E274121DED91007F838A /* TVShowsTestDB.cpp */; };
+		27F4E29C121DF242007F838A /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E29B121DF242007F838A /* libboost_program_options.dylib */; };
+		27F4E29F121DF268007F838A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E29E121DF268007F838A /* libboost_system.dylib */; };
+		27F4E2A4121DF2E5007F838A /* libcrypto.0.9.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2A2121DF2E5007F838A /* libcrypto.0.9.8.dylib */; };
+		27F4E2A5121DF2E5007F838A /* libssl.0.9.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2A3121DF2E5007F838A /* libssl.0.9.8.dylib */; };
+		27F4E2A9121DF30E007F838A /* libpion-common-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2A7121DF30E007F838A /* libpion-common-3.0.dylib */; };
+		27F4E2AA121DF30E007F838A /* libpion-net-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2A8121DF30E007F838A /* libpion-net-3.0.dylib */; };
+		27F4E2AD121DF326007F838A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2AC121DF326007F838A /* libsqlite3.dylib */; };
+		27F4E2B0121DF345007F838A /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4E2AF121DF345007F838A /* libboost_thread-mt.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27F4E22C121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E36F2E2E0CA78A0400120C6D /* libpion-common.a */;
+			remoteInfo = "pion-common: static";
+		};
+		27F4E22E121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E36F2E260CA789CD00120C6D /* libpion-common.dylib */;
+			remoteInfo = "pion-common: dynamic";
+		};
+		27F4E230121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E33288A20BEE5044006D0556 /* libpion-net.a */;
+			remoteInfo = "pion-net: static";
+		};
+		27F4E232121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E33288B80BEE50B4006D0556 /* libpion-net.dylib */;
+			remoteInfo = "pion-net: dynamic";
+		};
+		27F4E234121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E38F7F990CDFE5D400F9A9A7 /* AllowNothingService.so */;
+			remoteInfo = AllowNothingService;
+		};
+		27F4E236121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E352F4190C22F49100A7946C /* CookieService.so */;
+			remoteInfo = CookieService;
+		};
+		27F4E238121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E306A54E0C2307EC004DE0C0 /* HelloService.so */;
+			remoteInfo = HelloService;
+		};
+		27F4E23A121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E306A55D0C230930004DE0C0 /* EchoService.so */;
+			remoteInfo = EchoService;
+		};
+		27F4E23C121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E306A56C0C2309AD004DE0C0 /* LogService.so */;
+			remoteInfo = LogService;
+		};
+		27F4E23E121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E306A5760C2309E3004DE0C0 /* FileService.so */;
+			remoteInfo = FileService;
+		};
+		27F4E240121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E34919190BFE5F64001E1387 /* PionHelloServer */;
+			remoteInfo = PionHelloServer;
+		};
+		27F4E242121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E349191B0BFE5F72001E1387 /* PionWebServer */;
+			remoteInfo = PionWebServer;
+		};
+		27F4E244121DED42007F838A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E3CFE3590CD00E5300016E0F /* PionNetUnitTests */;
+			remoteInfo = PionNetUnitTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27F4E1D7121DECDC007F838A /* libbrainslug.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libbrainslug.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F4E1D9121DECDC007F838A /* libbrainslug_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libbrainslug_Prefix.pch; sourceTree = "<group>"; };
+		27F4E1DA121DECDC007F838A /* libbrainslugProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = libbrainslugProj.xcconfig; sourceTree = "<group>"; };
+		27F4E1DB121DECDC007F838A /* libbrainslugTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = libbrainslugTarget.xcconfig; sourceTree = "<group>"; };
+		27F4E216121DED42007F838A /* pion-net.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "pion-net.xcodeproj"; path = "/Volumes/Disk1/Code/brainslug/Contrib/pion-net-3.0.15/pion-net.xcodeproj"; sourceTree = "<absolute>"; };
+		27F4E249121DED91007F838A /* Conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conf.h; sourceTree = "<group>"; };
+		27F4E24B121DED91007F838A /* DB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB.h; sourceTree = "<group>"; };
+		27F4E24D121DED91007F838A /* FrontendServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrontendServer.h; sourceTree = "<group>"; };
+		27F4E24E121DED91007F838A /* MoviesResourceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesResourceHandler.h; sourceTree = "<group>"; };
+		27F4E250121DED91007F838A /* MoviesTestDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesTestDB.h; sourceTree = "<group>"; };
+		27F4E251121DED91007F838A /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
+		27F4E252121DED91007F838A /* ResourceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceHandler.h; sourceTree = "<group>"; };
+		27F4E254121DED91007F838A /* SeasonsResourceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsResourceHandler.h; sourceTree = "<group>"; };
+		27F4E255121DED91007F838A /* SeasonsTestDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonsTestDB.h; sourceTree = "<group>"; };
+		27F4E256121DED91007F838A /* SQLiteDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDB.h; sourceTree = "<group>"; };
+		27F4E257121DED91007F838A /* TestDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDB.h; sourceTree = "<group>"; };
+		27F4E258121DED91007F838A /* TVShowsResourceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsResourceHandler.h; sourceTree = "<group>"; };
+		27F4E259121DED91007F838A /* TVShowsTestDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsTestDB.h; sourceTree = "<group>"; };
+		27F4E267121DED91007F838A /* FrontendServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrontendServer.cpp; sourceTree = "<group>"; };
+		27F4E26C121DED91007F838A /* MoviesResourceHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoviesResourceHandler.cpp; sourceTree = "<group>"; };
+		27F4E26D121DED91007F838A /* MoviesTestDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoviesTestDB.cpp; sourceTree = "<group>"; };
+		27F4E26E121DED91007F838A /* ResourceHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceHandler.cpp; sourceTree = "<group>"; };
+		27F4E26F121DED91007F838A /* SeasonsResourceHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeasonsResourceHandler.cpp; sourceTree = "<group>"; };
+		27F4E270121DED91007F838A /* SeasonsTestDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeasonsTestDB.cpp; sourceTree = "<group>"; };
+		27F4E271121DED91007F838A /* SQLiteDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SQLiteDB.cpp; sourceTree = "<group>"; };
+		27F4E272121DED91007F838A /* TestDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDB.cpp; sourceTree = "<group>"; };
+		27F4E273121DED91007F838A /* TVShowsResourceHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TVShowsResourceHandler.cpp; sourceTree = "<group>"; };
+		27F4E274121DED91007F838A /* TVShowsTestDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TVShowsTestDB.cpp; sourceTree = "<group>"; };
+		27F4E29B121DF242007F838A /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = /opt/local/lib/libboost_program_options.dylib; sourceTree = "<absolute>"; };
+		27F4E29E121DF268007F838A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /opt/local/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
+		27F4E2A2121DF2E5007F838A /* libcrypto.0.9.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.0.9.8.dylib; path = /usr/lib/libcrypto.0.9.8.dylib; sourceTree = "<absolute>"; };
+		27F4E2A3121DF2E5007F838A /* libssl.0.9.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.0.9.8.dylib; path = /usr/lib/libssl.0.9.8.dylib; sourceTree = "<absolute>"; };
+		27F4E2A7121DF30E007F838A /* libpion-common-3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libpion-common-3.0.dylib"; path = "/usr/local/lib/libpion-common-3.0.dylib"; sourceTree = "<absolute>"; };
+		27F4E2A8121DF30E007F838A /* libpion-net-3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libpion-net-3.0.dylib"; path = "/usr/local/lib/libpion-net-3.0.dylib"; sourceTree = "<absolute>"; };
+		27F4E2AC121DF326007F838A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
+		27F4E2AF121DF345007F838A /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/opt/local/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27F4E1D4121DECDC007F838A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F4E29C121DF242007F838A /* libboost_program_options.dylib in Frameworks */,
+				27F4E29F121DF268007F838A /* libboost_system.dylib in Frameworks */,
+				27F4E2A4121DF2E5007F838A /* libcrypto.0.9.8.dylib in Frameworks */,
+				27F4E2A5121DF2E5007F838A /* libssl.0.9.8.dylib in Frameworks */,
+				27F4E2A9121DF30E007F838A /* libpion-common-3.0.dylib in Frameworks */,
+				27F4E2AA121DF30E007F838A /* libpion-net-3.0.dylib in Frameworks */,
+				27F4E2AD121DF326007F838A /* libsqlite3.dylib in Frameworks */,
+				27F4E2B0121DF345007F838A /* libboost_thread-mt.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27F4E1C8121DECDC007F838A = {
+			isa = PBXGroup;
+			children = (
+				27F4E2AF121DF345007F838A /* libboost_thread-mt.dylib */,
+				27F4E2AC121DF326007F838A /* libsqlite3.dylib */,
+				27F4E2A7121DF30E007F838A /* libpion-common-3.0.dylib */,
+				27F4E2A8121DF30E007F838A /* libpion-net-3.0.dylib */,
+				27F4E2A2121DF2E5007F838A /* libcrypto.0.9.8.dylib */,
+				27F4E2A3121DF2E5007F838A /* libssl.0.9.8.dylib */,
+				27F4E29E121DF268007F838A /* libboost_system.dylib */,
+				27F4E29B121DF242007F838A /* libboost_program_options.dylib */,
+				27F4E216121DED42007F838A /* pion-net.xcodeproj */,
+				27F4E1CF121DECDC007F838A /* Configuration Files */,
+				27F4E1D0121DECDC007F838A /* Source */,
+				27F4E1D1121DECDC007F838A /* Other Sources */,
+				27F4E1D2121DECDC007F838A /* Frameworks */,
+				27F4E1D8121DECDC007F838A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		27F4E1CF121DECDC007F838A /* Configuration Files */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E1DA121DECDC007F838A /* libbrainslugProj.xcconfig */,
+				27F4E1DB121DECDC007F838A /* libbrainslugTarget.xcconfig */,
+			);
+			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		27F4E1D0121DECDC007F838A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E248121DED91007F838A /* include */,
+				27F4E25A121DED91007F838A /* lib */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		27F4E1D1121DECDC007F838A /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E1D9121DECDC007F838A /* libbrainslug_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		27F4E1D2121DECDC007F838A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27F4E1D8121DECDC007F838A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E1D7121DECDC007F838A /* libbrainslug.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27F4E217121DED42007F838A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E22D121DED42007F838A /* libpion-common.a */,
+				27F4E22F121DED42007F838A /* libpion-common.dylib */,
+				27F4E231121DED42007F838A /* libpion-net.a */,
+				27F4E233121DED42007F838A /* libpion-net.dylib */,
+				27F4E235121DED42007F838A /* AllowNothingService.so */,
+				27F4E237121DED42007F838A /* CookieService.so */,
+				27F4E239121DED42007F838A /* HelloService.so */,
+				27F4E23B121DED42007F838A /* EchoService.so */,
+				27F4E23D121DED42007F838A /* LogService.so */,
+				27F4E23F121DED42007F838A /* FileService.so */,
+				27F4E241121DED42007F838A /* PionHelloServer */,
+				27F4E243121DED42007F838A /* PionWebServer */,
+				27F4E245121DED42007F838A /* PionNetUnitTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27F4E248121DED91007F838A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E249121DED91007F838A /* Conf.h */,
+				27F4E24B121DED91007F838A /* DB.h */,
+				27F4E24D121DED91007F838A /* FrontendServer.h */,
+				27F4E24E121DED91007F838A /* MoviesResourceHandler.h */,
+				27F4E250121DED91007F838A /* MoviesTestDB.h */,
+				27F4E251121DED91007F838A /* Options.h */,
+				27F4E252121DED91007F838A /* ResourceHandler.h */,
+				27F4E254121DED91007F838A /* SeasonsResourceHandler.h */,
+				27F4E255121DED91007F838A /* SeasonsTestDB.h */,
+				27F4E256121DED91007F838A /* SQLiteDB.h */,
+				27F4E257121DED91007F838A /* TestDB.h */,
+				27F4E258121DED91007F838A /* TVShowsResourceHandler.h */,
+				27F4E259121DED91007F838A /* TVShowsTestDB.h */,
+			);
+			name = include;
+			path = /Volumes/Disk1/Code/brainslug/Backend/include;
+			sourceTree = "<absolute>";
+		};
+		27F4E25A121DED91007F838A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				27F4E267121DED91007F838A /* FrontendServer.cpp */,
+				27F4E26C121DED91007F838A /* MoviesResourceHandler.cpp */,
+				27F4E26D121DED91007F838A /* MoviesTestDB.cpp */,
+				27F4E26E121DED91007F838A /* ResourceHandler.cpp */,
+				27F4E26F121DED91007F838A /* SeasonsResourceHandler.cpp */,
+				27F4E270121DED91007F838A /* SeasonsTestDB.cpp */,
+				27F4E271121DED91007F838A /* SQLiteDB.cpp */,
+				27F4E272121DED91007F838A /* TestDB.cpp */,
+				27F4E273121DED91007F838A /* TVShowsResourceHandler.cpp */,
+				27F4E274121DED91007F838A /* TVShowsTestDB.cpp */,
+			);
+			name = lib;
+			path = /Volumes/Disk1/Code/brainslug/Backend/lib;
+			sourceTree = "<absolute>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		27F4E1D5121DECDC007F838A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F4E275121DED91007F838A /* Conf.h in Headers */,
+				27F4E276121DED91007F838A /* DB.h in Headers */,
+				27F4E277121DED91007F838A /* FrontendServer.h in Headers */,
+				27F4E278121DED91007F838A /* MoviesResourceHandler.h in Headers */,
+				27F4E279121DED91007F838A /* MoviesTestDB.h in Headers */,
+				27F4E27A121DED91007F838A /* Options.h in Headers */,
+				27F4E27B121DED91007F838A /* ResourceHandler.h in Headers */,
+				27F4E27C121DED91007F838A /* SeasonsResourceHandler.h in Headers */,
+				27F4E27D121DED91007F838A /* SeasonsTestDB.h in Headers */,
+				27F4E27E121DED91007F838A /* SQLiteDB.h in Headers */,
+				27F4E27F121DED91007F838A /* TestDB.h in Headers */,
+				27F4E280121DED91007F838A /* TVShowsResourceHandler.h in Headers */,
+				27F4E281121DED91007F838A /* TVShowsTestDB.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		27F4E1D6121DECDC007F838A /* libbrainslug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F4E1E3121DECDC007F838A /* Build configuration list for PBXNativeTarget "libbrainslug" */;
+			buildPhases = (
+				27F4E1D3121DECDC007F838A /* Sources */,
+				27F4E1D4121DECDC007F838A /* Frameworks */,
+				27F4E1D5121DECDC007F838A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libbrainslug;
+			productName = libbrainslug;
+			productReference = 27F4E1D7121DECDC007F838A /* libbrainslug.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27F4E1CA121DECDC007F838A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 27F4E1CD121DECDC007F838A /* Build configuration list for PBXProject "libbrainslug" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 27F4E1C8121DECDC007F838A;
+			productRefGroup = 27F4E1D8121DECDC007F838A /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 27F4E217121DED42007F838A /* Products */;
+					ProjectRef = 27F4E216121DED42007F838A /* pion-net.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				27F4E1D6121DECDC007F838A /* libbrainslug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		27F4E22D121DED42007F838A /* libpion-common.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpion-common.a";
+			remoteRef = 27F4E22C121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E22F121DED42007F838A /* libpion-common.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libpion-common.dylib";
+			remoteRef = 27F4E22E121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E231121DED42007F838A /* libpion-net.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpion-net.a";
+			remoteRef = 27F4E230121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E233121DED42007F838A /* libpion-net.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = "libpion-net.dylib";
+			remoteRef = 27F4E232121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E235121DED42007F838A /* AllowNothingService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = AllowNothingService.so;
+			remoteRef = 27F4E234121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E237121DED42007F838A /* CookieService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = CookieService.so;
+			remoteRef = 27F4E236121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E239121DED42007F838A /* HelloService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = HelloService.so;
+			remoteRef = 27F4E238121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E23B121DED42007F838A /* EchoService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = EchoService.so;
+			remoteRef = 27F4E23A121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E23D121DED42007F838A /* LogService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = LogService.so;
+			remoteRef = 27F4E23C121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E23F121DED42007F838A /* FileService.so */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = FileService.so;
+			remoteRef = 27F4E23E121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E241121DED42007F838A /* PionHelloServer */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = PionHelloServer;
+			remoteRef = 27F4E240121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E243121DED42007F838A /* PionWebServer */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = PionWebServer;
+			remoteRef = 27F4E242121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27F4E245121DED42007F838A /* PionNetUnitTests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = PionNetUnitTests;
+			remoteRef = 27F4E244121DED42007F838A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27F4E1D3121DECDC007F838A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F4E282121DED91007F838A /* FrontendServer.cpp in Sources */,
+				27F4E285121DED92007F838A /* MoviesResourceHandler.cpp in Sources */,
+				27F4E286121DED92007F838A /* MoviesTestDB.cpp in Sources */,
+				27F4E287121DED92007F838A /* ResourceHandler.cpp in Sources */,
+				27F4E288121DED92007F838A /* SeasonsResourceHandler.cpp in Sources */,
+				27F4E289121DED92007F838A /* SeasonsTestDB.cpp in Sources */,
+				27F4E28A121DED92007F838A /* SQLiteDB.cpp in Sources */,
+				27F4E28B121DED92007F838A /* TestDB.cpp in Sources */,
+				27F4E28C121DED92007F838A /* TVShowsResourceHandler.cpp in Sources */,
+				27F4E28D121DED92007F838A /* TVShowsTestDB.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		27F4E1E1121DECDC007F838A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include,
+					../../../Contrib/cajun,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					/usr/local/lib,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		27F4E1E2121DECDC007F838A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/opt/local/include,
+					../../../Contrib/cajun,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/local/lib,
+					/usr/local/lib,
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		27F4E1E4121DECDC007F838A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../lib\"",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = libbrainslug;
+			};
+			name = Debug;
+		};
+		27F4E1E5121DECDC007F838A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../lib\"",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = libbrainslug;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27F4E1CD121DECDC007F838A /* Build configuration list for PBXProject "libbrainslug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F4E1E1121DECDC007F838A /* Debug */,
+				27F4E1E2121DECDC007F838A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27F4E1E3121DECDC007F838A /* Build configuration list for PBXNativeTarget "libbrainslug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F4E1E4121DECDC007F838A /* Debug */,
+				27F4E1E5121DECDC007F838A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27F4E1CA121DECDC007F838A /* Project object */;
+}
