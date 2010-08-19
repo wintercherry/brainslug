@@ -2,7 +2,6 @@
 #include "Options.h"
 #include "FrontendServer.h"
 #include <boost/program_options.hpp>
-#include <boost/asio.hpp>
 #include <iostream>
 
 namespace {
