@@ -15948,9 +15948,9 @@ _ACEOF
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SSL_library_init in -lssl" >&5
-$as_echo_n "checking for SSL_library_init in -lssl... " >&6; }
-if test "${ac_cv_lib_ssl_SSL_library_init+set}" = set; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SSL_CTX_free in -lssl" >&5
+$as_echo_n "checking for SSL_CTX_free in -lssl... " >&6; }
+if test "${ac_cv_lib_ssl_SSL_CTX_free+set}" = set; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
@@ -15964,27 +15964,27 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char SSL_library_init ();
+char SSL_CTX_free ();
 int
 main ()
 {
-return SSL_library_init ();
+return SSL_CTX_free ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_ssl_SSL_library_init=yes
+  ac_cv_lib_ssl_SSL_CTX_free=yes
 else
-  ac_cv_lib_ssl_SSL_library_init=no
+  ac_cv_lib_ssl_SSL_CTX_free=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_SSL_library_init" >&5
-$as_echo "$ac_cv_lib_ssl_SSL_library_init" >&6; }
-if test "x$ac_cv_lib_ssl_SSL_library_init" = x""yes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_SSL_CTX_free" >&5
+$as_echo "$ac_cv_lib_ssl_SSL_CTX_free" >&6; }
+if test "x$ac_cv_lib_ssl_SSL_CTX_free" = x""yes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_LIBSSL 1
 _ACEOF
@@ -15993,120 +15993,100 @@ _ACEOF
 
 fi
 
-
-# Checks for header files.
-
-# Checks for typedefs, structures, and compiler characteristics.
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for stdbool.h that conforms to C99" >&5
-$as_echo_n "checking for stdbool.h that conforms to C99... " >&6; }
-if test "${ac_cv_header_stdbool_h+set}" = set; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for write in -lpion-common" >&5
+$as_echo_n "checking for write in -lpion-common... " >&6; }
+if test "${ac_cv_lib_pion_common_write+set}" = set; then :
   $as_echo_n "(cached) " >&6
 else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lpion-common  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
-#include <stdbool.h>
-#ifndef bool
- "error: bool is not defined"
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
 #endif
-#ifndef false
- "error: false is not defined"
-#endif
-#if false
- "error: false is not 0"
-#endif
-#ifndef true
- "error: true is not defined"
-#endif
-#if true != 1
- "error: true is not 1"
-#endif
-#ifndef __bool_true_false_are_defined
- "error: __bool_true_false_are_defined is not defined"
-#endif
-
-	struct s { _Bool s: 1; _Bool t; } s;
-
-	char a[true == 1 ? 1 : -1];
-	char b[false == 0 ? 1 : -1];
-	char c[__bool_true_false_are_defined == 1 ? 1 : -1];
-	char d[(bool) 0.5 == true ? 1 : -1];
-	bool e = &s;
-	char f[(_Bool) 0.0 == false ? 1 : -1];
-	char g[true];
-	char h[sizeof (_Bool)];
-	char i[sizeof s.t];
-	enum { j = false, k = true, l = false * true, m = true * 256 };
-	/* The following fails for
-	   HP aC++/ANSI C B3910B A.05.55 [Dec 04 2003]. */
-	_Bool n[m];
-	char o[sizeof n == m * sizeof n[0] ? 1 : -1];
-	char p[-1 - (_Bool) 0 < 0 && -1 - (bool) 0 < 0 ? 1 : -1];
-#	if defined __xlc__ || defined __GNUC__
-	 /* Catch a bug in IBM AIX xlc compiler version 6.0.0.0
-	    reported by James Lemley on 2005-10-05; see
-	    http://lists.gnu.org/archive/html/bug-coreutils/2005-10/msg00086.html
-	    This test is not quite right, since xlc is allowed to
-	    reject this program, as the initializer for xlcbug is
-	    not one of the forms that C requires support for.
-	    However, doing the test right would require a runtime
-	    test, and that would make cross-compilation harder.
-	    Let us hope that IBM fixes the xlc bug, and also adds
-	    support for this kind of constant expression.  In the
-	    meantime, this test will reject xlc, which is OK, since
-	    our stdbool.h substitute should suffice.  We also test
-	    this with GCC, where it should work, to detect more
-	    quickly whether someone messes up the test in the
-	    future.  */
-	 char digs[] = "0123456789";
-	 int xlcbug = 1 / (&(digs + 5)[-2 + (bool) 1] == &digs[4] ? 1 : -1);
-#	endif
-	/* Catch a bug in an HP-UX C compiler.  See
-	   http://gcc.gnu.org/ml/gcc-patches/2003-12/msg02303.html
-	   http://lists.gnu.org/archive/html/bug-coreutils/2005-11/msg00161.html
-	 */
-	_Bool q = true;
-	_Bool *pq = &q;
-
+char write ();
 int
 main ()
 {
-
-	*pq |= q;
-	*pq |= ! q;
-	/* Refer to every declared value, to avoid compiler optimizations.  */
-	return (!a + !b + !c + !d + !e + !f + !g + !h + !i + !!j + !k + !!l
-		+ !m + !n + !o + !p + !q + !pq);
-
+return write ();
   ;
   return 0;
 }
 _ACEOF
-if ac_fn_c_try_compile "$LINENO"; then :
-  ac_cv_header_stdbool_h=yes
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_pion_common_write=yes
 else
-  ac_cv_header_stdbool_h=no
+  ac_cv_lib_pion_common_write=no
 fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_header_stdbool_h" >&5
-$as_echo "$ac_cv_header_stdbool_h" >&6; }
-ac_fn_c_check_type "$LINENO" "_Bool" "ac_cv_type__Bool" "$ac_includes_default"
-if test "x$ac_cv_type__Bool" = x""yes; then :
-
-cat >>confdefs.h <<_ACEOF
-#define HAVE__BOOL 1
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_pion_common_write" >&5
+$as_echo "$ac_cv_lib_pion_common_write" >&6; }
+if test "x$ac_cv_lib_pion_common_write" = x""yes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBPION_COMMON 1
 _ACEOF
 
+  LIBS="-lpion-common $LIBS"
 
 fi
 
-if test $ac_cv_header_stdbool_h = yes; then
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for write in -lpion-net" >&5
+$as_echo_n "checking for write in -lpion-net... " >&6; }
+if test "${ac_cv_lib_pion_net_write+set}" = set; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lpion-net  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
 
-$as_echo "#define HAVE_STDBOOL_H 1" >>confdefs.h
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char write ();
+int
+main ()
+{
+return write ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_pion_net_write=yes
+else
+  ac_cv_lib_pion_net_write=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_pion_net_write" >&5
+$as_echo "$ac_cv_lib_pion_net_write" >&6; }
+if test "x$ac_cv_lib_pion_net_write" = x""yes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBPION_NET 1
+_ACEOF
+
+  LIBS="-lpion-net $LIBS"
 
 fi
 
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+#AC_HEADER_STDBOOL
 ac_fn_c_check_type "$LINENO" "size_t" "ac_cv_type_size_t" "$ac_includes_default"
 if test "x$ac_cv_type_size_t" = x""yes; then :
 
@@ -16117,19 +16097,6 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 fi
-
-
-# Checks for library functions.
-for ac_func in select
-do :
-  ac_fn_c_check_func "$LINENO" "select" "ac_cv_func_select"
-if test "x$ac_cv_func_select" = x""yes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_SELECT 1
-_ACEOF
-
-fi
-done
 
 
 ac_config_files="$ac_config_files Makefile src/Makefile lib/Makefile"

@@ -23,16 +23,14 @@ BOOST_ASIO
 
 AC_CHECK_LIB([crypto], [BF_set_key])
 AC_CHECK_LIB([sqlite3], [sqlite3_open])
-AC_CHECK_LIB([ssl], [SSL_library_init])
-
+AC_CHECK_LIB([ssl], [SSL_CTX_free])
+AC_CHECK_LIB([pion-common], [write])
+AC_CHECK_LIB([pion-net], [write])
 # Checks for header files.
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
+#AC_HEADER_STDBOOL
 AC_TYPE_SIZE_T
-
-# Checks for library functions.
-AC_CHECK_FUNCS([select])
 
 AC_CONFIG_FILES([Makefile
 		 src/Makefile
