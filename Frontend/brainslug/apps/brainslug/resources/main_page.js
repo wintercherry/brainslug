@@ -80,7 +80,9 @@ Brainslug.mainPage = SC.Page.design({
 
 //      actOnSelect: YES,
 
-      exampleView: Brainslug.MovieGridItemView
+      exampleView: Brainslug.MovieGridItemView,
+
+      action: 'playMovie'
     }),
 
     /**
@@ -124,7 +126,20 @@ Brainslug.mainPage = SC.Page.design({
       this.getPath('tvShowList').becomeFirstResponder();
     }
 
+  }),
+
+  videoPlayback: Brainslug.MainPane.design({
+
+    classNames: 'video-playback'.w(),
+
+    childViews: 'videoContainer'.w(),
+
+    videoContainer: SC.View.design({
+
+    })
+
   })
   
 
 });
+
