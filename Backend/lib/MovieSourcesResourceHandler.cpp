@@ -13,5 +13,9 @@ MovieSourcesResourceHandler::MovieSourcesResourceHandler(const DBPtr db)
 }
 
 void MovieSourcesResourceHandler::initTestData() {
-
+  if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
+    std::string errMsg;
+    db()->execute("insert into moviesources(msrc_id,movie_id,msrc_url) values(1, 1, 'http://movies.apple.com/media/us/iphone/2010/ads/apple-iphone4-meet_her-us-20100711_r848-9cie.mov');",errMsg);
+    db()->execute("insert into moviesources(msrc_id,movie_id,msrc_url) values(2, 2, 'http://movies.apple.com/media/us/iphone/2010/ads/apple-iphone4-meet_her-us-20100711_r848-9cie.mov');",errMsg);
+  }
 }
