@@ -1,5 +1,6 @@
 #pragma once
 #include "MoviesResourceHandler.h"
+#include "MovieSourcesResourceHandler.h"
 #include "TVShowsResourceHandler.h"
 #include "SeasonsResourceHandler.h"
 #include "DB.h"
@@ -16,6 +17,7 @@ private:
   pion::net::HTTPServer _httpServer;
   const DBPtr _moviesTestDB;
   MoviesResourceHandler _mh;
+  MovieSourcesResourceHandler _msh;
   const DBPtr _tvshowsTestDB;
   TVShowsResourceHandler _tvh;
   const DBPtr _seasonsTestDB;

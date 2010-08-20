@@ -16,12 +16,14 @@ FrontendServer::FrontendServer(const Options& o)
   : _httpServer(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), o.port))
   , _moviesTestDB(new SQLiteDB)
   , _mh(_moviesTestDB)
+  , _msh(_moviesTestDB)
   , _tvshowsTestDB(new TVShowsTestDB)
   , _tvh(_tvshowsTestDB)
   , _seasonsTestDB(new SeasonsTestDB)
   , _sh(_seasonsTestDB)
 {
   _mh.initTestData();
+  _msh.initTestData();
   _tvh.initTestData();
   _sh.initTestData();
   _httpServer.setNotFoundHandler(
@@ -29,6 +31,9 @@ FrontendServer::FrontendServer(const Options& o)
   _httpServer.addResource(
 			  "/movies",
 			  boost::bind(&MoviesResourceHandler::handle, &_mh, _1, _2));
+  _httpServer.addResource(
+			  "/moviesources",
+			  boost::bind(&MovieSourcesResourceHandler::handle, &_msh, _1, _2));
   _httpServer.addResource(
 			  "/tvshows",
 			  boost::bind(&TVShowsResourceHandler::handle, &_tvh, _1, _2));
