@@ -1,4 +1,5 @@
 #include "TVShowsResourceHandler.h"
+#include "SQLiteDB.h"
 
 TVShowsResourceHandler::TVShowsResourceHandler(const DBPtr db)
   : ResourceHandler(db,"tvshows") {
@@ -11,7 +12,7 @@ TVShowsResourceHandler::TVShowsResourceHandler(const DBPtr db)
   }
 }
 
-void MoviesResourceHandler::initTestData() {
+void TVShowsResourceHandler::initTestData() {
   if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
     std::string errMsg;
     db()->execute("insert into tvshows (show_id,show_name,show_imdbid,show_coverurl) values (1, 'Desperate Housewives', 'tt0410975', 'http://getvideoartwork.com/gallery/main.php?g2_view=core.DownloadItem&g2_itemId=8131&g2_serialNumber=2');",errMsg);
