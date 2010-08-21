@@ -1,7 +1,5 @@
 #include "FrontendServer.h"
 #include "Options.h"
-#include "MoviesTestDB.h"
-#include "TVShowsTestDB.h"
 #include "SeasonsTestDB.h"
 #include "SQLiteDB.h"
 #include <pion/net/HTTPResponseWriter.hpp>
@@ -17,8 +15,7 @@ FrontendServer::FrontendServer(const Options& o)
   , _moviesTestDB(new SQLiteDB)
   , _mh(_moviesTestDB)
   , _msh(_moviesTestDB)
-  , _tvshowsTestDB(new TVShowsTestDB)
-  , _tvh(_tvshowsTestDB)
+  , _tvh(_moviesTestDB)
   , _seasonsTestDB(new SeasonsTestDB)
   , _sh(_seasonsTestDB)
 {
