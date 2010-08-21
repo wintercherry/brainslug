@@ -18,7 +18,6 @@ private:
   const DBPtr _moviesTestDB;
   MoviesResourceHandler _mh;
   MovieSourcesResourceHandler _msh;
-  const DBPtr _tvshowsTestDB;
   TVShowsResourceHandler _tvh;
   const DBPtr _seasonsTestDB;
   SeasonsResourceHandler _sh;
