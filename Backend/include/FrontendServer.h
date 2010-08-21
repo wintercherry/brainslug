@@ -15,7 +15,7 @@ private:
   void handleNotFound(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
 
   pion::net::HTTPServer _httpServer;
-  const DBPtr _moviesTestDB;
+  const DBPtr _cacheDB;
   MoviesResourceHandler _mh;
   MovieSourcesResourceHandler _msh;
   TVShowsResourceHandler _tvh;
