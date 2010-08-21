@@ -12,10 +12,10 @@
 
 FrontendServer::FrontendServer(const Options& o)
   : _httpServer(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), o.port))
-  , _moviesTestDB(new SQLiteDB)
-  , _mh(_moviesTestDB)
-  , _msh(_moviesTestDB)
-  , _tvh(_moviesTestDB)
+  , _cacheDB(new SQLiteDB)
+  , _mh(_cacheDB)
+  , _msh(_cacheDB)
+  , _tvh(_cacheDB)
   , _seasonsTestDB(new SeasonsTestDB)
   , _sh(_seasonsTestDB)
 {
