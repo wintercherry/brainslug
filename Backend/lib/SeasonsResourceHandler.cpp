@@ -1,7 +1,26 @@
 #include "SeasonsResourceHandler.h"
+#include "SQLiteDB.h"
 
 SeasonsResourceHandler::SeasonsResourceHandler(const DBPtr db)
-  : ResourceHandler(db,"seasons") {}
+  : ResourceHandler(db,"seasons") { 
+  if (boost::dynamic_pointer_cast<SQLiteDB>(db)) {
+    std::string errMsg;
+    if (!db->execute("create table if not exists seasons (season_id integer primary key asc autoincrement, season_number integer not null, season_coverurl text, tvshow_id integer not null, foreign key(tvshow_id) references tvshows(show_id), unique key (season_number,tvshow_id));",errMsg)) {
+      std::cerr << "Unable to initialize tvshows table in cache db. Reason: " << errMsg << std::endl;
+      exit(1);
+    }
+  }
+}
+
+void SeasonsResourceHandler::initTestData() {
+  if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
+    std::string errMsg;
+    db()->execute("insert into seasons(season_id,season_number,season_coverurl,tvshow_id) values (1,1,'http://getvideoartwork.com/gallery/main.php?g2_view=core.DownloadItem&g2_itemId=8131&g2_serialNumber=2',1);",errMsg);
+    db()->execute("insert into seasons(season_id,season_number,season_coverurl,tvshow_id) values (2,2,'http://getvideoartwork.com/gallery/main.php?g2_view=core.DownloadItem&g2_itemId=8131&g2_serialNumber=2',1);",errMsg);
+    db()->execute("insert into seasons(season_id,season_number,season_coverurl,tvshow_id) values (3,3,'http://getvideoartwork.com/gallery/main.php?g2_view=core.DownloadItem&g2_itemId=8131&g2_serialNumber=3',2);",errMsg);
+    db()->execute("insert into seasons(season_id,season_number,season_coverurl,tvshow_id) values (4,4,'http://getvideoartwork.com/gallery/main.php?g2_view=core.DownloadItem&g2_itemId=8131&g2_serialNumber=2',2);",errMsg);
+  }
+}
 
 void SeasonsResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
   if (request->hasQuery("tvShow"))
@@ -11,6 +30,7 @@ void SeasonsResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::ne
 }
 
 void SeasonsResourceHandler::findByTVShowID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
+  /*
   const pion::net::HTTPTypes::QueryParams& params = request->getQueryParams();
   const pion::net::HTTPTypes::QueryParams::const_iterator match(params.find("tvShow"));
   if (match != params.end()) {
@@ -24,5 +44,6 @@ void SeasonsResourceHandler::findByTVShowID(pion::net::HTTPRequestPtr& request, 
 								 boost::bind(&pion::net::TCPConnection::finish, connection)));
     }
   }
+  */
 }
 
