@@ -5,8 +5,8 @@ SeasonsResourceHandler::SeasonsResourceHandler(const DBPtr db)
   : ResourceHandler(db,"seasons") { 
   if (boost::dynamic_pointer_cast<SQLiteDB>(db)) {
     std::string errMsg;
-    if (!db->execute("create table if not exists seasons (season_id integer primary key asc autoincrement, season_number integer not null, season_coverurl text, tvshow_id integer not null, foreign key(tvshow_id) references tvshows(show_id), unique key (season_number,tvshow_id));",errMsg)) {
-      std::cerr << "Unable to initialize tvshows table in cache db. Reason: " << errMsg << std::endl;
+    if (!db->execute("create table if not exists seasons (season_id integer primary key asc autoincrement, season_number integer not null, season_coverurl text, tvshow_id integer not null, foreign key(tvshow_id) references tvshows(show_id), unique (season_number,tvshow_id));",errMsg)) {
+      std::cerr << "Unable to initialize seasons table in cache db. Reason: " << errMsg << std::endl;
       exit(1);
     }
   }

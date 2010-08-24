@@ -57,7 +57,7 @@ am_libbrainslug_la_OBJECTS = FrontendServer.lo \
 	MoviesResourceHandler.lo TVShowsResourceHandler.lo \
 	MoviesTestDB.lo TVShowsTestDB.lo ResourceHandler.lo TestDB.lo \
 	SeasonsTestDB.lo SeasonsResourceHandler.lo SQLiteDB.lo \
-	MovieSourcesResourceHandler.lo
+	MovieSourcesResourceHandler.lo EpisodesResourceHandler.lo
 libbrainslug_la_OBJECTS = $(am_libbrainslug_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -212,7 +212,8 @@ libbrainslug_la_SOURCES = FrontendServer.cpp \
 	SeasonsTestDB.cpp \
 	SeasonsResourceHandler.cpp \
 	SQLiteDB.cpp \
-	MovieSourcesResourceHandler.cpp
+	MovieSourcesResourceHandler.cpp \
+	EpisodesResourceHandler.cpp
 
 all: all-am
 
@@ -283,6 +284,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/EpisodesResourceHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/FrontendServer.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MovieSourcesResourceHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MoviesResourceHandler.Plo@am__quote@
