@@ -14,6 +14,7 @@ public:
 protected:
   DBPtr db() const;
   const std::string& source() const;
+  virtual std::string listStatement() const { return std::string(); }
   virtual void list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
   virtual void findByID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
   static void writeJsonHttpResponse(const json::Object& obj, pion::net::HTTPResponseWriter& writer, const bool setStatusOK=true);

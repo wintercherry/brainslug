@@ -6,7 +6,8 @@ public:
   SeasonsResourceHandler(const DBPtr db);
   void handle(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
   virtual void initTestData();
+protected:
+  virtual std::string listStatement() const;
 private:
   void findByTVShowID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
-  void list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
 };

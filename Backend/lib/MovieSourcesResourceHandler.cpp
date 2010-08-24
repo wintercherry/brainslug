@@ -12,6 +12,10 @@ MovieSourcesResourceHandler::MovieSourcesResourceHandler(const DBPtr db)
   }
 }
 
+std::string MovieSourcesResourceHandler::listStatement() const {
+  return "select msrc_id as id, msrc_url as url, movie_id as movie from moviesources;";
+}
+
 void MovieSourcesResourceHandler::initTestData() {
   if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
     std::string errMsg;
