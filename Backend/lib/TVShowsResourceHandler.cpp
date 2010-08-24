@@ -12,6 +12,11 @@ TVShowsResourceHandler::TVShowsResourceHandler(const DBPtr db)
   }
 }
 
+std::string TVShowsResourceHandler::listStatement() const {
+  return "select show_id as id, show_imdbid as imdbId, show_name as name, show_coverurl as coverUrl from tvshows;";
+}
+
+
 void TVShowsResourceHandler::initTestData() {
   if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
     std::string errMsg;

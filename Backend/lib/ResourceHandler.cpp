@@ -49,10 +49,43 @@ void ResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::net::TCPC
   }
 }
 
+
+namespace {
+  struct Lister {
+    Lister() : _doc(new json::Object) {}
+
+    void callback(int colCount, char** colValues, char** colNames) {
+      json::Object item;
+      for (int i(0); i<colCount; ++i) {
+	assert(colNames[i]);
+	if ( const char* const value = colValues[i] )
+	  item[colNames[i]] = json::String(value);
+	else
+	  item[colNames[i]] = json::Null();
+      }
+      _content.Insert(item);
+    }
+
+    void finish() {
+      (*_doc)["content"] = _content;
+      (*_doc)["error"] = json::Null();
+    }
+
+    JSONObjectPtr _doc;
+    json::Array _content;
+  };
+}
+
+
 void ResourceHandler::list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
-  if (JSONObjectPtr doc = db()->select(_source)) {
+  Lister l;
+  std::string errMsg;
+  const std::string stmt(listStatement());
+  assert(!stmt.empty());
+  if (db()->execute(listStatement(),errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3))) {
+    l.finish();
     writeJsonHttpResponse(
-			  *doc,
+			  *l._doc,
 			  *pion::net::HTTPResponseWriter::create(
 								 connection,
 								 *request,

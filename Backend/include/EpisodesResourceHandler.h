@@ -4,6 +4,8 @@
 class EpisodesResourceHandler : public ResourceHandler {
 public:
   EpisodesResourceHandler(const DBPtr db);
-  void handle(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
   virtual void initTestData();
+protected:
+  virtual std::string listStatement() const;
+
 };
