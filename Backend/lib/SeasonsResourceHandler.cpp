@@ -29,6 +29,41 @@ void SeasonsResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::ne
     ResourceHandler::handle(request,connection);
 }
 
+namespace {
+  struct Lister {
+    Lister() : _doc(new json::Object) {}
+
+    void callback(int colCount, char** colValues, char** colNames) {
+      json::Object item;
+      for (int i(0); i<colCount; ++i) {
+	item[colNames[i]] = json::String(colValues[i]);
+      }
+      _content.Insert(item);
+    }
+
+    void finish() {
+      (*_doc)["content"] = _content;
+    }
+
+    JSONObjectPtr _doc;
+    json::Array _content;
+  };
+}
+
+void SeasonsResourceHandler::list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
+  Lister l;
+  std::string errMsg;
+  if (db()->execute("select * from seasons;",errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3))) {
+    l.finish();
+    writeJsonHttpResponse(
+			  *l._doc,
+			  *pion::net::HTTPResponseWriter::create(
+								 connection,
+								 *request,
+								 boost::bind(&pion::net::TCPConnection::finish, connection)));
+  }
+}
+
 void SeasonsResourceHandler::findByTVShowID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
   /*
   const pion::net::HTTPTypes::QueryParams& params = request->getQueryParams();

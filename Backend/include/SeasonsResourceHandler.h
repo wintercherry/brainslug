@@ -8,4 +8,5 @@ public:
   virtual void initTestData();
 private:
   void findByTVShowID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
+  void list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
 };
