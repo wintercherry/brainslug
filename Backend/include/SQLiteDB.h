@@ -6,7 +6,7 @@ class SQLiteDB : public DB {
 public:
   SQLiteDB();
   ~SQLiteDB();
-  virtual bool execute(const std::string& query, std::string& errorMessage) const;
+  virtual bool execute(const std::string& query, std::string& errorMessage, const ExecuteCallback& callback) const;
   virtual JSONObjectPtr select(const std::string& fromSource) const;
   virtual JSONObjectPtr selectWhere(
 				    const std::string& fromSource, 
