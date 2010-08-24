@@ -10,4 +10,5 @@ libbrainslug_la_SOURCES = FrontendServer.cpp \
 	SeasonsTestDB.cpp \
 	SeasonsResourceHandler.cpp \
 	SQLiteDB.cpp \
-	MovieSourcesResourceHandler.cpp
+	MovieSourcesResourceHandler.cpp \
+	EpisodesResourceHandler.cpp

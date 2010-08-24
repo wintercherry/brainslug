@@ -3,6 +3,7 @@
 #include "MovieSourcesResourceHandler.h"
 #include "TVShowsResourceHandler.h"
 #include "SeasonsResourceHandler.h"
+#include "EpisodesResourceHandler.h"
 #include "DB.h"
 
 struct Options;
@@ -20,4 +21,5 @@ private:
   MovieSourcesResourceHandler _msh;
   TVShowsResourceHandler _tvh;
   SeasonsResourceHandler _sh;
+  EpisodesResourceHandler _eh;
 };
