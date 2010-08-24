@@ -16,8 +16,7 @@ FrontendServer::FrontendServer(const Options& o)
   , _mh(_cacheDB)
   , _msh(_cacheDB)
   , _tvh(_cacheDB)
-  , _seasonsTestDB(new SeasonsTestDB)
-  , _sh(_seasonsTestDB)
+  , _sh(_cacheDB)
 {
   _mh.initTestData();
   _msh.initTestData();

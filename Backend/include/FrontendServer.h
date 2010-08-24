@@ -19,6 +19,5 @@ private:
   MoviesResourceHandler _mh;
   MovieSourcesResourceHandler _msh;
   TVShowsResourceHandler _tvh;
-  const DBPtr _seasonsTestDB;
   SeasonsResourceHandler _sh;
 };
