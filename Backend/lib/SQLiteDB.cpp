@@ -16,9 +16,19 @@ SQLiteDB::~SQLiteDB() {
   }
 }
 
-bool SQLiteDB::execute(const std::string& query, std::string& errorMessage ) const {
+namespace {
+  int execCallback(void* _callback, int colCount, char** colValues, char** colNames) {
+    if (_callback) {
+      const SQLiteDB::ExecuteCallback& callback = *(const SQLiteDB::ExecuteCallback*)(_callback);
+      callback(colCount, colValues, colNames);
+    }
+    return 0;
+  }
+}
+
+bool SQLiteDB::execute(const std::string& query, std::string& errorMessage, const ExecuteCallback& callback = ExecuteCallback()) const {
   char* errMsg = 0;
-  const int ret( sqlite3_exec(_db, query.c_str(), NULL, NULL, &errMsg) );
+  const int ret( sqlite3_exec(_db, query.c_str(), execCallback, (void*)&callback, &errMsg) );
   if (errMsg) {
     errorMessage = errMsg;
     sqlite3_free(errMsg);
