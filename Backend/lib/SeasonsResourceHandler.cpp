@@ -43,6 +43,7 @@ namespace {
 
     void finish() {
       (*_doc)["content"] = _content;
+      (*_doc)["error"] = json::Null();
     }
 
     JSONObjectPtr _doc;
