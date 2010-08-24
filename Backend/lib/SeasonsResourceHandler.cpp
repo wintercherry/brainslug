@@ -54,7 +54,7 @@ namespace {
 void SeasonsResourceHandler::list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
   Lister l;
   std::string errMsg;
-  if (db()->execute("select * from seasons;",errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3))) {
+  if (db()->execute("select season_id as id, season_number as number, season_coverurl as coverUrl, tvshow_id as tvShow from seasons;",errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3))) {
     l.finish();
     writeJsonHttpResponse(
 			  *l._doc,
