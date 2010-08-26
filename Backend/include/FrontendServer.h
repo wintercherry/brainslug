@@ -12,6 +12,7 @@ class FrontendServer {
 public:
   FrontendServer(const Options&);
   void run();
+  void join();
 private:
   void handleNotFound(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
 

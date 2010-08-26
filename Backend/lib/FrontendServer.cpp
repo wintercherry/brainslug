@@ -42,6 +42,11 @@ FrontendServer::FrontendServer(const Options& o)
 			  boost::bind(&EpisodesResourceHandler::handle, &_eh, _1, _2));
 }
 
+void FrontendServer::join() {
+  if (_httpServer.isListening())
+    _httpServer.join();
+}
+
 void FrontendServer::run() {
   if (!_httpServer.isListening())
     _httpServer.start();

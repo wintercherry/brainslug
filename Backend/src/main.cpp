@@ -1,6 +1,7 @@
 #include "Conf.h"
 #include "Options.h"
 #include "FrontendServer.h"
+#include "FileScanner.h"
 #include <boost/program_options.hpp>
 #include <iostream>
 
@@ -32,8 +33,15 @@ namespace {
 
   void startServices(const Options& o) {
     try {
-      FrontendServer fs(o);
-      fs.run();
+      FrontendServer frontendServer(o);
+      FileScanner fileScanner;
+      {
+        frontendServer.run();
+        fileScanner.run();
+	// always join the filescanner before the frontendserver!
+	fileScanner.join();
+	frontendServer.join();
+      }
     } catch (const std::exception& e) {
       std::cerr << "Caught exception running backend services: " << e.what() << std::endl;
     }
