@@ -12,6 +12,35 @@ SeasonsResourceHandler::SeasonsResourceHandler(const DBPtr db)
   }
 }
 
+namespace {
+  const std::string season_id("season_id"); const std::string id("id");
+  const std::string season_number("season_number"); const std::string number("number");
+  const std::string season_coverurl("season_coverurl"); const std::string coverUrl("coverUrl");
+  const std::string tvshow_id("tvshow_id"); const std::string tvShow("tvShow");
+}
+
+SanitizedParams SeasonsResourceHandler::sanitizeQueryParams(const pion::net::HTTPTypes::QueryParams& dirtyParams) const {
+  SanitizedParams sq;
+  pion::net::HTTPTypes::QueryParams::const_iterator it(dirtyParams.begin());
+  const pion::net::HTTPTypes::QueryParams::const_iterator end(dirtyParams.end());
+  for (; it!=end; ++it) {
+    std::string sanitizedKey;
+    const std::string& key = it->first;
+    if (key == id)
+      sanitizedKey = season_id;
+    else if (key == number)
+      sanitizedKey = season_number;
+    else if (key == coverUrl)
+      sanitizedKey = season_coverurl;
+    else if (key == tvShow)
+      sanitizedKey = tvshow_id;
+    else
+      continue;
+    sq.insert(std::make_pair(sanitizedKey,it->second));
+  }
+  return sq;
+}
+
 void SeasonsResourceHandler::initTestData() {
   if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
     std::string errMsg;
@@ -22,32 +51,12 @@ void SeasonsResourceHandler::initTestData() {
   }
 }
 
-void SeasonsResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
-  if (request->hasQuery("tvShow"))
-      findByTVShowID(request,connection);
-  else
-    ResourceHandler::handle(request,connection);
+std::string SeasonsResourceHandler::viewStatement() const {
+  return "select season_id as id, season_number as number, season_coverurl as coverUrl, tvshow_id as tvShow from seasons";
 }
 
 std::string SeasonsResourceHandler::listStatement() const {
-  return "select season_id as id, season_number as number, season_coverurl as coverUrl, tvshow_id as tvShow from seasons;";
+  return viewStatement() + ";";
 }
 
-void SeasonsResourceHandler::findByTVShowID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
-  /*
-  const pion::net::HTTPTypes::QueryParams& params = request->getQueryParams();
-  const pion::net::HTTPTypes::QueryParams::const_iterator match(params.find("tvShow"));
-  if (match != params.end()) {
-    const std::string& tvShowID = match->second;
-    if (JSONObjectPtr doc = db()->selectWhere(source(), std::make_pair("tvShow",tvShowID))) {
-    writeJsonHttpResponse(
-			  *doc,
-			  *pion::net::HTTPResponseWriter::create(
-								 connection,
-								 *request,
-								 boost::bind(&pion::net::TCPConnection::finish, connection)));
-    }
-  }
-  */
-}
 
