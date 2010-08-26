@@ -12,10 +12,43 @@ MoviesResourceHandler::MoviesResourceHandler(const DBPtr db)
   }
 }
 
-std::string MoviesResourceHandler::listStatement() const {
-  return "select movie_id as id, movie_name as name, movie_imdbid as imdbId, movie_coverurl as coverUrl from movies;";
+namespace {
+  const std::string movie_id("movie_id"); const std::string id("id");
+  const std::string movie_name("movie_name"); const std::string name("name");
+  const std::string movie_imdbid("movie_imdbid"); const std::string imdbId("imdbId");
+  const std::string movie_coverurl("movie_coverurl"); const std::string coverUrl("coverUrl");
 }
 
+SanitizedParams MoviesResourceHandler::sanitizeQueryParams(const pion::net::HTTPTypes::QueryParams& dirtyParams) const {
+  SanitizedParams sq;
+  pion::net::HTTPTypes::QueryParams::const_iterator it(dirtyParams.begin());
+  const pion::net::HTTPTypes::QueryParams::const_iterator end(dirtyParams.end());
+  for (; it!=end; ++it) {
+    std::string sanitizedKey;
+    const std::string& key = it->first;
+    if (key == id)
+      sanitizedKey = movie_id;
+    else if (key == name)
+      sanitizedKey = movie_name;
+    else if (key == coverUrl)
+      sanitizedKey = movie_coverurl;
+    else if (key == imdbId)
+      sanitizedKey = movie_imdbid;
+    else
+      continue;
+    sq.insert(std::make_pair(sanitizedKey,it->second));
+  }
+  return sq;
+}
+
+
+std::string MoviesResourceHandler::viewStatement() const {
+  return "select movie_id as id, movie_name as name, movie_imdbid as imdbId, movie_coverurl as coverUrl from movies";
+}
+
+std::string MoviesResourceHandler::listStatement() const {
+  return viewStatement() + ";";
+}
 
 void MoviesResourceHandler::initTestData() {
   if (boost::dynamic_pointer_cast<SQLiteDB>(db())) {
