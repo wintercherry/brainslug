@@ -1,8 +1,5 @@
 #include "FrontendServer.h"
 #include "Options.h"
-#include "MoviesTestDB.h"
-#include "TVShowsTestDB.h"
-#include "SeasonsTestDB.h"
 #include "SQLiteDB.h"
 #include <pion/net/HTTPResponseWriter.hpp>
 #include <pion/net/HTTPTypes.hpp>
@@ -14,27 +11,35 @@
 
 FrontendServer::FrontendServer(const Options& o)
   : _httpServer(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), o.port))
-  , _moviesTestDB(new SQLiteDB)
-  , _mh(_moviesTestDB)
-  , _tvshowsTestDB(new TVShowsTestDB)
-  , _tvh(_tvshowsTestDB)
-  , _seasonsTestDB(new SeasonsTestDB)
-  , _sh(_seasonsTestDB)
+  , _cacheDB(new SQLiteDB)
+  , _mh(_cacheDB)
+  , _msh(_cacheDB)
+  , _tvh(_cacheDB)
+  , _sh(_cacheDB)
+  , _eh(_cacheDB)
 {
   _mh.initTestData();
+  _msh.initTestData();
   _tvh.initTestData();
   _sh.initTestData();
+  _eh.initTestData();
   _httpServer.setNotFoundHandler(
 				 boost::bind(&FrontendServer::handleNotFound, this, _1, _2));
   _httpServer.addResource(
 			  "/movies",
 			  boost::bind(&MoviesResourceHandler::handle, &_mh, _1, _2));
   _httpServer.addResource(
+			  "/moviesources",
+			  boost::bind(&MovieSourcesResourceHandler::handle, &_msh, _1, _2));
+  _httpServer.addResource(
 			  "/tvshows",
 			  boost::bind(&TVShowsResourceHandler::handle, &_tvh, _1, _2));
   _httpServer.addResource(
 			  "/seasons",
 			  boost::bind(&SeasonsResourceHandler::handle, &_sh, _1, _2));
+ _httpServer.addResource(
+			  "/episodes",
+			  boost::bind(&EpisodesResourceHandler::handle, &_eh, _1, _2));
 }
 
 void FrontendServer::run() {

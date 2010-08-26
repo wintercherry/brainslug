@@ -31,7 +31,7 @@ void ResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::net::TCPC
   if (request->hasQuery("list"))
     list(request,connection);
   else if (request->hasQuery("view"))
-    findByID(request,connection);
+    view(request,connection);
   else {
     JSONObjectPtr doc(new json::Object);
     (*doc)["error"] = json::String(std::string("unrecognized query ") + request->getQueryString());
@@ -49,30 +49,69 @@ void ResourceHandler::handle(pion::net::HTTPRequestPtr& request, pion::net::TCPC
   }
 }
 
-void ResourceHandler::list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
-  if (JSONObjectPtr doc = db()->select(_source)) {
-    writeJsonHttpResponse(
-			  *doc,
-			  *pion::net::HTTPResponseWriter::create(
-								 connection,
-								 *request,
-								 boost::bind(&pion::net::TCPConnection::finish, connection)));
-  }
+
+namespace {
+  struct Lister {
+    Lister() : _doc(new json::Object) {}
+
+    void callback(int colCount, char** colValues, char** colNames) {
+      json::Object item;
+      for (int i(0); i<colCount; ++i) {
+	assert(colNames[i]);
+	if ( const char* const value = colValues[i] )
+	  item[colNames[i]] = json::String(value);
+	else
+	  item[colNames[i]] = json::Null();
+      }
+      _content.Insert(item);
+    }
+
+    void finish() {
+      (*_doc)["content"] = _content;
+      (*_doc)["error"] = json::Null();
+    }
+
+    JSONObjectPtr _doc;
+    json::Array _content;
+  };
+
 }
 
-void ResourceHandler::findByID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
-  const pion::net::HTTPTypes::QueryParams& params = request->getQueryParams();
-  const pion::net::HTTPTypes::QueryParams::const_iterator match(params.find("view"));
-  if (match != params.end()) {
-    const std::string& id = match->second;
-    if (JSONObjectPtr doc = db()->selectWhere(_source, std::make_pair("id",id))) {
-    writeJsonHttpResponse(
-			  *doc,
-			  *pion::net::HTTPResponseWriter::create(
-								 connection,
-								 *request,
-								 boost::bind(&pion::net::TCPConnection::finish, connection)));
+void ResourceHandler::list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
+    Lister l;
+    std::string errMsg;
+    const std::string stmt(listStatement());
+    assert(!stmt.empty());
+    assert(_db);
+    if (_db->execute(stmt,errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3))) {
+      l.finish();
+      writeJsonHttpResponse(
+			    *l._doc,
+			    *pion::net::HTTPResponseWriter::create(
+								   connection,
+								   *request,
+								   boost::bind(&pion::net::TCPConnection::finish, connection)));
     }
+}
+
+void ResourceHandler::view(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection) {
+  SanitizedParams sq(sanitizeQueryParams(request->getQueryParams()));
+  if (sq.empty()) 
+    list(request,connection); // no search params is the same as listing everything
+  else {
+    Lister l;
+    std::string errMsg;
+    const std::string stmt(viewStatement());
+    assert(!stmt.empty());
+    if (_db->execute(stmt,errMsg,boost::bind(&Lister::callback,boost::ref(l),_1,_2,_3),sq)) {
+      l.finish();
+      writeJsonHttpResponse(
+			    *l._doc,
+			    *pion::net::HTTPResponseWriter::create(
+								   connection,
+								   *request,
+								   boost::bind(&pion::net::TCPConnection::finish, connection)));
+    }    
   }
 }
 
