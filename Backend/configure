@@ -15858,51 +15858,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 fi
 
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for BF_set_key in -lcrypto" >&5
-$as_echo_n "checking for BF_set_key in -lcrypto... " >&6; }
-if test "${ac_cv_lib_crypto_BF_set_key+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lcrypto  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char BF_set_key ();
-int
-main ()
-{
-return BF_set_key ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_crypto_BF_set_key=yes
-else
-  ac_cv_lib_crypto_BF_set_key=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_BF_set_key" >&5
-$as_echo "$ac_cv_lib_crypto_BF_set_key" >&6; }
-if test "x$ac_cv_lib_crypto_BF_set_key" = x""yes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBCRYPTO 1
-_ACEOF
-
-  LIBS="-lcrypto $LIBS"
-
-fi
-
+#AC_CHECK_LIB([crypto], [BF_set_key])
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for sqlite3_open in -lsqlite3" >&5
 $as_echo_n "checking for sqlite3_open in -lsqlite3... " >&6; }
 if test "${ac_cv_lib_sqlite3_sqlite3_open+set}" = set; then :
@@ -15948,96 +15904,8 @@ _ACEOF
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for SSL_CTX_free in -lssl" >&5
-$as_echo_n "checking for SSL_CTX_free in -lssl... " >&6; }
-if test "${ac_cv_lib_ssl_SSL_CTX_free+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lssl  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char SSL_CTX_free ();
-int
-main ()
-{
-return SSL_CTX_free ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_ssl_SSL_CTX_free=yes
-else
-  ac_cv_lib_ssl_SSL_CTX_free=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_SSL_CTX_free" >&5
-$as_echo "$ac_cv_lib_ssl_SSL_CTX_free" >&6; }
-if test "x$ac_cv_lib_ssl_SSL_CTX_free" = x""yes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBSSL 1
-_ACEOF
-
-  LIBS="-lssl $LIBS"
-
-fi
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for write in -lpion-common" >&5
-$as_echo_n "checking for write in -lpion-common... " >&6; }
-if test "${ac_cv_lib_pion_common_write+set}" = set; then :
-  $as_echo_n "(cached) " >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lpion-common  $LIBS"
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-/* Override any GCC internal prototype to avoid an error.
-   Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-char write ();
-int
-main ()
-{
-return write ();
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_pion_common_write=yes
-else
-  ac_cv_lib_pion_common_write=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_pion_common_write" >&5
-$as_echo "$ac_cv_lib_pion_common_write" >&6; }
-if test "x$ac_cv_lib_pion_common_write" = x""yes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBPION_COMMON 1
-_ACEOF
-
-  LIBS="-lpion-common $LIBS"
-
-fi
-
+#AC_CHECK_LIB([ssl], [SSL_CTX_free])
+#AC_CHECK_LIB([pion-common], [write])
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for write in -lpion-net" >&5
 $as_echo_n "checking for write in -lpion-net... " >&6; }
 if test "${ac_cv_lib_pion_net_write+set}" = set; then :

@@ -14,8 +14,11 @@ public:
 protected:
   DBPtr db() const;
   const std::string& source() const;
+  virtual SanitizedParams sanitizeQueryParams(const pion::net::HTTPTypes::QueryParams& dirtyParams) const { return SanitizedParams(); }
+  virtual std::string listStatement() const { return std::string(); }
+  virtual std::string viewStatement() const { return std::string(); } // in derived classes this must return a select statement which allows a where clause to be appended to the end
   virtual void list(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
-  virtual void findByID(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
+  virtual void view(pion::net::HTTPRequestPtr& request, pion::net::TCPConnectionPtr& connection);
   static void writeJsonHttpResponse(const json::Object& obj, pion::net::HTTPResponseWriter& writer, const bool setStatusOK=true);
 
 private:

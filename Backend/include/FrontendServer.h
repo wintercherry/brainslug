@@ -1,7 +1,9 @@
 #pragma once
 #include "MoviesResourceHandler.h"
+#include "MovieSourcesResourceHandler.h"
 #include "TVShowsResourceHandler.h"
 #include "SeasonsResourceHandler.h"
+#include "EpisodesResourceHandler.h"
 #include "DB.h"
 
 struct Options;
@@ -14,10 +16,10 @@ private:
   void handleNotFound(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
 
   pion::net::HTTPServer _httpServer;
-  const DBPtr _moviesTestDB;
+  const DBPtr _cacheDB;
   MoviesResourceHandler _mh;
-  const DBPtr _tvshowsTestDB;
+  MovieSourcesResourceHandler _msh;
   TVShowsResourceHandler _tvh;
-  const DBPtr _seasonsTestDB;
   SeasonsResourceHandler _sh;
+  EpisodesResourceHandler _eh;
 };
