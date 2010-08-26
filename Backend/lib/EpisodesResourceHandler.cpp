@@ -12,8 +12,42 @@ EpisodesResourceHandler::EpisodesResourceHandler(const DBPtr db)
   }
 }
 
+namespace {
+  const std::string episode_id("episode_id"); const std::string id("id");
+  const std::string episode_number("episode_number"); const std::string number("number");
+  const std::string tvshow_id("tvshow_id"); const std::string tvShow("tvShow");
+  const std::string season_id("season_id"); const std::string season("season");
+}
+
+SanitizedParams EpisodesResourceHandler::sanitizeQueryParams(const pion::net::HTTPTypes::QueryParams& dirtyParams) const {
+  SanitizedParams sq;
+  pion::net::HTTPTypes::QueryParams::const_iterator it(dirtyParams.begin());
+  const pion::net::HTTPTypes::QueryParams::const_iterator end(dirtyParams.end());
+  for (; it!=end; ++it) {
+    std::string sanitizedKey;
+    const std::string& key = it->first;
+    if (key == id)
+      sanitizedKey = episode_id;
+    else if (key == number)
+      sanitizedKey = episode_number;
+    else if (key == tvShow)
+      sanitizedKey = tvshow_id;
+    else if (key == season)
+      sanitizedKey = season_id;
+    else
+      continue;
+    sq.insert(std::make_pair(sanitizedKey,it->second));
+  }
+  return sq;
+}
+
+
+std::string EpisodesResourceHandler::viewStatement() const {
+  return "select episode_id as id, episode_name as name, episode_imdbid as imdbId, episode_number as number, season_id as season, tvshow_id as tvShow from episodes";
+}
+
 std::string EpisodesResourceHandler::listStatement() const {
-  return "select episode_id as id, episode_name as name, episode_imdbid as imdbId, episode_number as number, season_id as season, tvshow_id as tvShow from episodes;";
+  return viewStatement() + ";";
 }
 
 void EpisodesResourceHandler::initTestData() {

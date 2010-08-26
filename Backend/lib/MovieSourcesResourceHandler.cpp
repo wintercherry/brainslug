@@ -12,8 +12,39 @@ MovieSourcesResourceHandler::MovieSourcesResourceHandler(const DBPtr db)
   }
 }
 
+namespace {
+  const std::string msrc_id("msrc_id"); const std::string id("id");
+  const std::string movie_id("movie_id"); const std::string movie("movie");
+  const std::string msrc_url("msrc_url"); const std::string url("url");
+}
+
+SanitizedParams MovieSourcesResourceHandler::sanitizeQueryParams(const pion::net::HTTPTypes::QueryParams& dirtyParams) const {
+  SanitizedParams sq;
+  pion::net::HTTPTypes::QueryParams::const_iterator it(dirtyParams.begin());
+  const pion::net::HTTPTypes::QueryParams::const_iterator end(dirtyParams.end());
+  for (; it!=end; ++it) {
+    std::string sanitizedKey;
+    const std::string& key = it->first;
+    if (key == id)
+      sanitizedKey = msrc_id;
+    else if (key == url)
+      sanitizedKey = msrc_url;
+    else if (key == movie)
+      sanitizedKey = movie_id;
+    else
+      continue;
+    sq.insert(std::make_pair(sanitizedKey,it->second));
+  }
+  return sq;
+}
+
+
+std::string MovieSourcesResourceHandler::viewStatement() const {
+  return "select msrc_id as id, msrc_url as url, movie_id as movie from moviesources";
+}
+
 std::string MovieSourcesResourceHandler::listStatement() const {
-  return "select msrc_id as id, msrc_url as url, movie_id as movie from moviesources;";
+  return viewStatement() + ";";
 }
 
 void MovieSourcesResourceHandler::initTestData() {
