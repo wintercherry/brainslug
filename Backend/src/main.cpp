@@ -4,6 +4,7 @@
 #include "FileScanner.h"
 #include <boost/program_options.hpp>
 #include <iostream>
+#include <Theron/Framework.h>
 
 namespace {
 
@@ -33,6 +34,7 @@ namespace {
 
   void startServices(const Options& o) {
     try {
+      Theron::Framework fw;
       FrontendServer frontendServer(o);
       FileScanner fileScanner;
       {
