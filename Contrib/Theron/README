@@ -1,0 +1,1 @@
+This is the Theron actors library with some small modifications. I killed all the win32 specific stuff, removed the hand-written makefile, and switched it to use libtool. It also requires Boost now instead of making it only optional. Otherwise it's the same as before.
