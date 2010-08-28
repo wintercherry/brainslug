@@ -8,6 +8,7 @@
 #include <json/elements.h>
 #include <iostream>
 #include <sstream>
+#include <Theron/Framework.h>
 
 FrontendServer::FrontendServer(const Options& o)
   : _httpServer(boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), o.port))
@@ -17,7 +18,11 @@ FrontendServer::FrontendServer(const Options& o)
   , _tvh(_cacheDB)
   , _sh(_cacheDB)
   , _eh(_cacheDB)
+  , _fileScanner(Theron::Address::Null()) 
 {
+  RegisterHandler(this, &FrontendServer::handleFileScannerMessage);
+  RegisterHandler(this, &FrontendServer::handleRunMessage);
+  RegisterHandler(this, &FrontendServer::handleJoinMessage);
   _mh.initTestData();
   _msh.initTestData();
   _tvh.initTestData();
@@ -71,4 +76,16 @@ void FrontendServer::handleNotFound(pion::net::HTTPRequestPtr& request, pion::ne
   dumpRequestToCout(request);
 }
 
+void FrontendServer::handleFileScannerMessage(const FileScannerMessage& fsm, const Theron::Address from) {
+  _fileScanner = from;
+}
+
+void FrontendServer::handleJoinMessage(const JoinMessage& jm, const Theron::Address from) {
+  join();
+  GetFramework().Send(JoinFinishedMessage(), from, GetAddress());
+}
+
+void FrontendServer::handleRunMessage(const RunMessage& rm, const Theron::Address from) {
+  run();
+}
 

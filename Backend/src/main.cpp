@@ -2,9 +2,10 @@
 #include "Options.h"
 #include "FrontendServer.h"
 #include "FileScanner.h"
+#include <Theron/Framework.h>
+#include <Theron/Receiver.h>
 #include <boost/program_options.hpp>
 #include <iostream>
-#include <Theron/Framework.h>
 
 namespace {
 
@@ -35,15 +36,17 @@ namespace {
   void startServices(const Options& o) {
     try {
       Theron::Framework fw;
-      FrontendServer frontendServer(o);
-      FileScanner fileScanner;
-      {
-        frontendServer.run();
-        fileScanner.run();
-	// always join the filescanner before the frontendserver!
-	fileScanner.join();
-	frontendServer.join();
-      }
+      Theron::ActorRef frontendServer(fw.CreateActor<FrontendServer>(o));
+      Theron::ActorRef fileScanner(fw.CreateActor<FileScanner>());
+      frontendServer.Push(FileScannerMessage(),fileScanner.GetAddress());
+      fileScanner.Push(FrontendServerMessage(),frontendServer.GetAddress());
+      Theron::Receiver joinReceiver, generalReceiver;
+      frontendServer.Push(RunMessage(),generalReceiver.GetAddress());
+      fileScanner.Push(RunMessage(),generalReceiver.GetAddress());
+      frontendServer.Push(JoinMessage(),joinReceiver.GetAddress());
+      joinReceiver.Wait();
+      fileScanner.Push(JoinMessage(),joinReceiver.GetAddress());
+      joinReceiver.Wait();
     } catch (const std::exception& e) {
       std::cerr << "Caught exception running backend services: " << e.what() << std::endl;
     }
