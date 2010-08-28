@@ -4,4 +4,5 @@ Dependencies:
 
 boost (tested with 1.43)
 cajun (located in Contrib)
-pion-net
+pion-net (located in Contrib)
+Theron (located in Contrib)
