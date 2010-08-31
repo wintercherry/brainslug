@@ -20,10 +20,15 @@ public:
   typedef Options Parameters;
 
 private:
+  void stop();
   void handleNotFound(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
+  void handleShutdown(pion::net::HTTPRequestPtr&,pion::net::TCPConnectionPtr&);
+  void handleDefault(const Theron::Address from);
   void handleFileScannerMessage(const FileScannerMessage& fsm, const Theron::Address from);
   void handleJoinMessage(const JoinMessage& jm, const Theron::Address from);
   void handleRunMessage(const RunMessage& rm, const Theron::Address from);
+  void handleShutdownMessage(const ShutdownMessage& rm, const Theron::Address from);
+
 
   pion::net::HTTPServer _httpServer;
   const DBPtr _cacheDB;
@@ -32,5 +37,5 @@ private:
   TVShowsResourceHandler _tvh;
   SeasonsResourceHandler _sh;
   EpisodesResourceHandler _eh;
-  Theron::Address _fileScanner;
+  Theron::Address _fileScanner, _joinReceiver;
 };

@@ -6,6 +6,7 @@
 #include <Theron/Receiver.h>
 #include <boost/program_options.hpp>
 #include <iostream>
+#include <cassert>
 
 namespace {
 
@@ -35,18 +36,19 @@ namespace {
 
   void startServices(const Options& o) {
     try {
-      Theron::Framework fw;
+      Theron::Framework fw(2);
       Theron::ActorRef frontendServer(fw.CreateActor<FrontendServer>(o));
       Theron::ActorRef fileScanner(fw.CreateActor<FileScanner>());
       frontendServer.Push(FileScannerMessage(),fileScanner.GetAddress());
       fileScanner.Push(FrontendServerMessage(),frontendServer.GetAddress());
-      Theron::Receiver joinReceiver, generalReceiver;
-      frontendServer.Push(RunMessage(),generalReceiver.GetAddress());
-      fileScanner.Push(RunMessage(),generalReceiver.GetAddress());
-      frontendServer.Push(JoinMessage(),joinReceiver.GetAddress());
-      joinReceiver.Wait();
-      fileScanner.Push(JoinMessage(),joinReceiver.GetAddress());
-      joinReceiver.Wait();
+      Theron::Receiver frontendReceiver, fileScannerReceiver;
+      frontendServer.Push(RunMessage(),frontendReceiver.GetAddress());
+      fileScanner.Push(RunMessage(),fileScannerReceiver.GetAddress());
+      frontendServer.Push(JoinMessage(),frontendReceiver.GetAddress());
+      assert(frontendReceiver.Count()==0);
+      frontendReceiver.Wait();
+      fileScanner.Push(JoinMessage(),fileScannerReceiver.GetAddress());
+      fileScannerReceiver.Wait();
     } catch (const std::exception& e) {
       std::cerr << "Caught exception running backend services: " << e.what() << std::endl;
     }

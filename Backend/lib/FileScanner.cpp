@@ -20,7 +20,7 @@ void FileScanner::handleFrontendServerMessage(const FrontendServerMessage& fsm, 
 
 void FileScanner::handleJoinMessage(const JoinMessage& jm, const Theron::Address from) {
   join();
-  GetFramework().Send(JoinFinishedMessage(), from, GetAddress());
+  GetFramework().Send(JoinFinishedMessage(), GetAddress(), from);
 }
 
 void FileScanner::handleRunMessage(const RunMessage& rm, const Theron::Address from) {
