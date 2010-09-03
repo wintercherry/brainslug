@@ -7,6 +7,7 @@ FileScanner::FileScanner()
   RegisterHandler(this, &FileScanner::handleFrontendServerMessage);
   RegisterHandler(this, &FileScanner::handleRunMessage);
   RegisterHandler(this, &FileScanner::handleJoinMessage);
+  RegisterHandler(this, &FileScanner::handleFinishedScanningMessage);
   _supportedExtensions.insert(".avi");
   _supportedExtensions.insert(".mp4");
   _supportedExtensions.insert(".mov");
@@ -42,19 +43,43 @@ void FileScanner::launchTVAgents() {
 
 namespace {
   const bfs::directory_iterator dirEnd;
+
+  struct TVAgent : public Theron::Actor {
+    Theron::Address _fs;
+    std::vector<Theron::ActorRef> _tvAgents;
+
+    TVAgent() : _fs(Theron::Address::Null()) {
+      RegisterHandler(this, &TVAgent::handle);
+    }
+
+    void handle(const StartScanningMessage& sm, const Theron::Address from) {
+      _fs = from;
+      if (bfs::exists(sm._path)) {
+	bfs::directory_iterator dirIt(sm._path);
+	for (; dirIt!=dirEnd; ++dirIt) {
+	  if (bfs::is_directory(dirIt->status())) {
+	    const Theron::ActorRef subDirAgent(GetFramework().CreateActor<TVAgent>());
+	    GetFramework().Send(StartScanningMessage(dirIt->path(),sm._supportedExtensions), from, subDirAgent.GetAddress());
+	    _tvAgents.push_back(subDirAgent);
+	  } else if (sm._supportedExtensions.find(dirIt->path().extension())!=sm._supportedExtensions.end()) {
+	    std::cout << "Located matching file: " << dirIt->path().file_string() << std::endl;
+	  }
+	}
+      }   
+      GetFramework().Send(FinishedScanningMessage(), GetAddress(), _fs);
+    }
+
+  };
 }
 
 void FileScanner::launchTVAgentForPath(const bfs::path& p) {
-  if (bfs::exists(p)) {
-    bfs::directory_iterator dirIt(p);
-    for (; dirIt!=dirEnd; ++dirIt) {
-      if (bfs::is_directory(dirIt->status())) {
-	launchTVAgentForPath(dirIt->path());
-      } else if (_supportedExtensions.find(dirIt->path().extension())!=_supportedExtensions.end()) {
-	std::cout << "Located matching file: " << dirIt->path().file_string() << std::endl;
-      }
-    }
-  }
+  const Theron::ActorRef agent(GetFramework().CreateActor<TVAgent>());
+  GetFramework().Send(StartScanningMessage(p,_supportedExtensions), GetAddress(), agent.GetAddress());
+  _tvAgents.push_back(agent);
+}
+
+void FileScanner::handleFinishedScanningMessage(const FinishedScanningMessage& fsm, const Theron::Address from) {
+  // remove agent
 }
 
 void FileScanner::launchMovieAgents() {
